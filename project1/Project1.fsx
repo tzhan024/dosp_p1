@@ -72,7 +72,7 @@ let countZeros (hashString) =
     i
 // countZeros "00000ooooo"
 
-
+let mutable conti = true
 
 //creating actor model
 let sys = ActorSystem.Create("Bitcoin")
@@ -109,8 +109,9 @@ type Worker(name) =
                     |> String.concat System.String.Empty
                 ByteToHex(hs)
 
-            if (countZeros sha) > msg.K then 
+            if (countZeros sha) >= msg.K then 
                 printfn "%s  ->  %s\n" msg.W sha
+                conti <- false
                 // let ap : ActorParameter = {
                 //     A = 100
                 //     S = 10000000
@@ -138,12 +139,14 @@ type Dispatcher(name) =
                 printfn "founded"
             else
                 let workers = 
-                    [1 .. ap.A]
+                    [1 .. 1000]
                     |> List.map(fun id -> let properties = [| string(id) :> obj |]
                                           sys.ActorOf(Props(typedefof<Worker>, properties)))
-                let rand = Random(1234567890)
+                let rand = Random(1234)
 
-                for i = 1 to ap.S do//cannot process to msg.B, can only process to a number before msg.B, and i cannot find the reason
+                // for i = 1 to ap.S do//cannot process to msg.B, can only process to a number before msg.B, and i cannot find the reason
+                // while conti do
+                for i = 1 to 100000 do
                     let prefix = "tinghui.zhang;"
 
                     //get random string
@@ -159,22 +162,34 @@ type Dispatcher(name) =
                     //combine them
                     let string = prefix + (randomStr 10)
                     let myMessage = {Message.K = n; Message.W = string}
-                    workers.Item(rand.Next() % ap.A) <! myMessage
+                    workers.Item(i % 1000) <! myMessage
                
         | _ ->  failwith "unknown message"
 
 
-let getDispatcher = sys.ActorOf(Props(typedefof<Dispatcher>, [| string("1") :> obj |]))
-let ap : ActorParameter = {
-    A = 100
-    S = 10000000
-    isFound = false
-} 
-getDispatcher <! ap
+// let getDispatcher = sys.ActorOf(Props(typedefof<Dispatcher>, [| string("1") :> obj |]))
+// let ap : ActorParameter = {
+//     A = 100
+//     S = 10000000
+//     isFound = false
+// } 
+// getDispatcher <! ap
 
 [<EntryPoint>]
 let main argv =
-    printfn "%d" n
-    // printfn "%s" sha
-    // printfn "%d" (countZeros sha)
+    let getDispatcher = sys.ActorOf(Props(typedefof<Dispatcher>, [| string("1") :> obj |]))
+    while conti do
+        let ap : ActorParameter = {
+            A = 100
+            S = 10000000
+            isFound = false
+        } 
+        getDispatcher <! ap
+        // printfn "%d" n
+        // printfn "%s" sha
+        // printfn "%d" (countZeros sha)
     0 // return an integer exit code
+
+
+// add loop to main and terminate conditionally
+//send message in loop

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/tinghuizhang/Desktop/Courses/cop5615/p1/project1/project1.fsproj": {}
+    "/Users/tinghuizhang/Desktop/Courses/cop5615/p1/dosp_p1/project1/project1.fsproj": {}
   },
   "projects": {
-    "/Users/tinghuizhang/Desktop/Courses/cop5615/p1/project1/project1.fsproj": {
+    "/Users/tinghuizhang/Desktop/Courses/cop5615/p1/dosp_p1/project1/project1.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/tinghuizhang/Desktop/Courses/cop5615/p1/project1/project1.fsproj",
+        "projectUniqueName": "/Users/tinghuizhang/Desktop/Courses/cop5615/p1/dosp_p1/project1/project1.fsproj",
         "projectName": "project1",
-        "projectPath": "/Users/tinghuizhang/Desktop/Courses/cop5615/p1/project1/project1.fsproj",
+        "projectPath": "/Users/tinghuizhang/Desktop/Courses/cop5615/p1/dosp_p1/project1/project1.fsproj",
         "packagesPath": "/Users/tinghuizhang/.nuget/packages/",
-        "outputPath": "/Users/tinghuizhang/Desktop/Courses/cop5615/p1/project1/obj/",
+        "outputPath": "/Users/tinghuizhang/Desktop/Courses/cop5615/p1/dosp_p1/project1/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/tinghuizhang/.nuget/NuGet/NuGet.Config"
