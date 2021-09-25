@@ -177,6 +177,7 @@ type Dispatcher(name) =
 
 [<EntryPoint>]
 let main argv =
+    let timer = System.Diagnostics.Stopwatch.StartNew()
     let getDispatcher = sys.ActorOf(Props(typedefof<Dispatcher>, [| string("1") :> obj |]))
     while conti do
         let ap : ActorParameter = {
@@ -188,6 +189,8 @@ let main argv =
         // printfn "%d" n
         // printfn "%s" sha
         // printfn "%d" (countZeros sha)
+    timer.Stop()
+    printfn "%f ms" timer.Elapsed.TotalMilliseconds
     0 // return an integer exit code
 
 
